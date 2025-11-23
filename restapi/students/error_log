@@ -1,0 +1,138 @@
+[27-Jun-2024 05:58:34 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php:17
+Stack trace:
+#0 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php(17): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'govindlal_colle...')
+#1 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/students/update.php(12): Database->getConnection()
+#2 {main}
+  thrown in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php on line 17
+[27-Jun-2024 05:59:20 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php:17
+Stack trace:
+#0 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php(17): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'govindlal_colle...')
+#1 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/students/update.php(12): Database->getConnection()
+#2 {main}
+  thrown in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php on line 17
+[27-Jun-2024 06:00:15 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php:17
+Stack trace:
+#0 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php(17): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'govindlal_colle...')
+#1 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/students/update.php(12): Database->getConnection()
+#2 {main}
+  thrown in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php on line 17
+[27-Jun-2024 06:00:24 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php:17
+Stack trace:
+#0 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php(17): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'govindlal_colle...')
+#1 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/students/update.php(12): Database->getConnection()
+#2 {main}
+  thrown in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php on line 17
+[27-Jun-2024 06:42:12 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php:17
+Stack trace:
+#0 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php(17): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'govindlal_colle...')
+#1 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/students/update.php(12): Database->getConnection()
+#2 {main}
+  thrown in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php on line 17
+[27-Jun-2024 06:43:38 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php:17
+Stack trace:
+#0 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php(17): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'govindlal_colle...')
+#1 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/students/update.php(12): Database->getConnection()
+#2 {main}
+  thrown in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php on line 17
+[27-Jun-2024 06:44:14 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php:17
+Stack trace:
+#0 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php(17): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'govindlal_colle...')
+#1 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/students/update.php(12): Database->getConnection()
+#2 {main}
+  thrown in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php on line 17
+[27-Jun-2024 06:49:37 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php:17
+Stack trace:
+#0 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php(17): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'govindlal_colle...')
+#1 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/students/update.php(12): Database->getConnection()
+#2 {main}
+  thrown in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php on line 17
+[27-Jun-2024 06:50:05 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php:17
+Stack trace:
+#0 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php(17): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'govindlal_colle...')
+#1 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/students/update.php(12): Database->getConnection()
+#2 {main}
+  thrown in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php on line 17
+[27-Jun-2024 06:50:12 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php:17
+Stack trace:
+#0 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php(17): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'govindlal_colle...')
+#1 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/students/update.php(12): Database->getConnection()
+#2 {main}
+  thrown in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php on line 17
+[27-Jun-2024 06:51:53 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php:17
+Stack trace:
+#0 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php(17): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'govindlal_colle...')
+#1 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/students/update.php(12): Database->getConnection()
+#2 {main}
+  thrown in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php on line 17
+[27-Jun-2024 06:51:55 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php:17
+Stack trace:
+#0 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php(17): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'govindlal_colle...')
+#1 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/students/update.php(12): Database->getConnection()
+#2 {main}
+  thrown in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php on line 17
+[27-Jun-2024 06:52:05 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php:17
+Stack trace:
+#0 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php(17): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'govindlal_colle...')
+#1 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/students/update.php(12): Database->getConnection()
+#2 {main}
+  thrown in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php on line 17
+[27-Jun-2024 06:52:09 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php:17
+Stack trace:
+#0 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php(17): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'govindlal_colle...')
+#1 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/students/update.php(12): Database->getConnection()
+#2 {main}
+  thrown in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php on line 17
+[27-Jun-2024 06:56:11 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php:17
+Stack trace:
+#0 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php(17): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'govindlal_colle...')
+#1 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/students/update.php(12): Database->getConnection()
+#2 {main}
+  thrown in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php on line 17
+[27-Jun-2024 06:56:15 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php:17
+Stack trace:
+#0 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php(17): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'govindlal_colle...')
+#1 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/students/update.php(12): Database->getConnection()
+#2 {main}
+  thrown in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php on line 17
+[27-Jun-2024 06:58:58 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php:17
+Stack trace:
+#0 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php(17): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'govindlal_colle...')
+#1 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/students/update.php(12): Database->getConnection()
+#2 {main}
+  thrown in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php on line 17
+[27-Jun-2024 06:59:05 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php:17
+Stack trace:
+#0 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php(17): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'govindlal_colle...')
+#1 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/students/update.php(12): Database->getConnection()
+#2 {main}
+  thrown in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php on line 17
+[27-Jun-2024 07:02:51 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php:17
+Stack trace:
+#0 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php(17): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'govindlal_colle...')
+#1 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/students/update.php(12): Database->getConnection()
+#2 {main}
+  thrown in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php on line 17
+[27-Jun-2024 07:13:44 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php:17
+Stack trace:
+#0 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php(17): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'govindlal_colle...')
+#1 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/students/update.php(12): Database->getConnection()
+#2 {main}
+  thrown in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php on line 17
+[27-Jun-2024 07:21:28 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php:17
+Stack trace:
+#0 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php(17): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'govindlal_colle...')
+#1 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/students/update.php(12): Database->getConnection()
+#2 {main}
+  thrown in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php on line 17
+[27-Jun-2024 07:23:39 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php:17
+Stack trace:
+#0 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php(17): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'govindlal_colle...')
+#1 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/students/update.php(12): Database->getConnection()
+#2 {main}
+  thrown in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php on line 17
+[27-Jun-2024 07:27:03 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php:17
+Stack trace:
+#0 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php(17): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'govindlal_colle...')
+#1 /home2/alumniportalorg/demo.alumniportal.org.in/restapi/students/update.php(12): Database->getConnection()
+#2 {main}
+  thrown in /home2/alumniportalorg/demo.alumniportal.org.in/restapi/config/config.php on line 17
