@@ -1,0 +1,103 @@
+[23-Nov-2025 15:43:59 Asia/Kolkata] PHP Warning:  Constant APP_DEBUG already defined in /Applications/XAMPP/xamppfiles/htdocs/imalatur/config/app_config.php on line 11
+[23-Nov-2025 15:44:06 Asia/Kolkata] PHP Warning:  Constant APP_DEBUG already defined in /Applications/XAMPP/xamppfiles/htdocs/imalatur/config/app_config.php on line 11
+[23-Nov-2025 15:44:06 Asia/Kolkata] Failed to store OTP in DB: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'imalatur.otps' doesn't exist
+[23-Nov-2025 15:44:08 Asia/Kolkata] Suppressed output before JSON response: 
+[23-Nov-2025 15:44:23 Asia/Kolkata] PHP Warning:  Constant APP_DEBUG already defined in /Applications/XAMPP/xamppfiles/htdocs/imalatur/config/app_config.php on line 11
+[23-Nov-2025 15:44:23 Asia/Kolkata] Exception in register.php POST: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'imalatur.otps' doesn't exist
+#0 /Applications/XAMPP/xamppfiles/htdocs/imalatur/userpanel/register.php(190): PDOStatement->execute(Array)
+#1 /Applications/XAMPP/xamppfiles/htdocs/imalatur/userpanel/register.php(341): verify_otp_db(Object(PDO), '919096463943', '9048')
+#2 {main}
+[23-Nov-2025 15:44:23 Asia/Kolkata] Suppressed output before JSON response: 
+[23-Nov-2025 15:44:24 Asia/Kolkata] PHP Warning:  Constant APP_DEBUG already defined in /Applications/XAMPP/xamppfiles/htdocs/imalatur/config/app_config.php on line 11
+[23-Nov-2025 15:44:24 Asia/Kolkata] Exception in register.php POST: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'imalatur.otps' doesn't exist
+#0 /Applications/XAMPP/xamppfiles/htdocs/imalatur/userpanel/register.php(190): PDOStatement->execute(Array)
+#1 /Applications/XAMPP/xamppfiles/htdocs/imalatur/userpanel/register.php(341): verify_otp_db(Object(PDO), '919096463943', '9048')
+#2 {main}
+[23-Nov-2025 15:44:24 Asia/Kolkata] Suppressed output before JSON response: 
+[23-Nov-2025 15:44:24 Asia/Kolkata] PHP Warning:  Constant APP_DEBUG already defined in /Applications/XAMPP/xamppfiles/htdocs/imalatur/config/app_config.php on line 11
+[23-Nov-2025 15:44:24 Asia/Kolkata] Exception in register.php POST: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'imalatur.otps' doesn't exist
+#0 /Applications/XAMPP/xamppfiles/htdocs/imalatur/userpanel/register.php(190): PDOStatement->execute(Array)
+#1 /Applications/XAMPP/xamppfiles/htdocs/imalatur/userpanel/register.php(341): verify_otp_db(Object(PDO), '919096463943', '9048')
+#2 {main}
+[23-Nov-2025 15:44:24 Asia/Kolkata] Suppressed output before JSON response: 
+[23-Nov-2025 15:44:24 Asia/Kolkata] PHP Warning:  Constant APP_DEBUG already defined in /Applications/XAMPP/xamppfiles/htdocs/imalatur/config/app_config.php on line 11
+[23-Nov-2025 15:44:24 Asia/Kolkata] Exception in register.php POST: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'imalatur.otps' doesn't exist
+#0 /Applications/XAMPP/xamppfiles/htdocs/imalatur/userpanel/register.php(190): PDOStatement->execute(Array)
+#1 /Applications/XAMPP/xamppfiles/htdocs/imalatur/userpanel/register.php(341): verify_otp_db(Object(PDO), '919096463943', '9048')
+#2 {main}
+[23-Nov-2025 15:44:24 Asia/Kolkata] Suppressed output before JSON response: 
+[23-Nov-2025 15:44:24 Asia/Kolkata] PHP Warning:  Constant APP_DEBUG already defined in /Applications/XAMPP/xamppfiles/htdocs/imalatur/config/app_config.php on line 11
+[23-Nov-2025 15:44:24 Asia/Kolkata] Exception in register.php POST: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'imalatur.otps' doesn't exist
+#0 /Applications/XAMPP/xamppfiles/htdocs/imalatur/userpanel/register.php(190): PDOStatement->execute(Array)
+#1 /Applications/XAMPP/xamppfiles/htdocs/imalatur/userpanel/register.php(341): verify_otp_db(Object(PDO), '919096463943', '9048')
+#2 {main}
+[23-Nov-2025 15:44:24 Asia/Kolkata] Suppressed output before JSON response: 
+[23-Nov-2025 15:44:25 Asia/Kolkata] PHP Warning:  Constant APP_DEBUG already defined in /Applications/XAMPP/xamppfiles/htdocs/imalatur/config/app_config.php on line 11
+[23-Nov-2025 15:44:25 Asia/Kolkata] Exception in register.php POST: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'imalatur.otps' doesn't exist
+#0 /Applications/XAMPP/xamppfiles/htdocs/imalatur/userpanel/register.php(190): PDOStatement->execute(Array)
+#1 /Applications/XAMPP/xamppfiles/htdocs/imalatur/userpanel/register.php(341): verify_otp_db(Object(PDO), '919096463943', '9048')
+#2 {main}
+[23-Nov-2025 15:44:25 Asia/Kolkata] Suppressed output before JSON response: 
+[23-Nov-2025 15:44:25 Asia/Kolkata] PHP Warning:  Constant APP_DEBUG already defined in /Applications/XAMPP/xamppfiles/htdocs/imalatur/config/app_config.php on line 11
+[23-Nov-2025 15:44:25 Asia/Kolkata] Exception in register.php POST: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'imalatur.otps' doesn't exist
+#0 /Applications/XAMPP/xamppfiles/htdocs/imalatur/userpanel/register.php(190): PDOStatement->execute(Array)
+#1 /Applications/XAMPP/xamppfiles/htdocs/imalatur/userpanel/register.php(341): verify_otp_db(Object(PDO), '919096463943', '9048')
+#2 {main}
+[23-Nov-2025 15:44:25 Asia/Kolkata] Suppressed output before JSON response: 
+[23-Nov-2025 15:44:25 Asia/Kolkata] PHP Warning:  Constant APP_DEBUG already defined in /Applications/XAMPP/xamppfiles/htdocs/imalatur/config/app_config.php on line 11
+[23-Nov-2025 15:44:25 Asia/Kolkata] Exception in register.php POST: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'imalatur.otps' doesn't exist
+#0 /Applications/XAMPP/xamppfiles/htdocs/imalatur/userpanel/register.php(190): PDOStatement->execute(Array)
+#1 /Applications/XAMPP/xamppfiles/htdocs/imalatur/userpanel/register.php(341): verify_otp_db(Object(PDO), '919096463943', '9048')
+#2 {main}
+[23-Nov-2025 15:44:25 Asia/Kolkata] Suppressed output before JSON response: 
+[23-Nov-2025 15:44:25 Asia/Kolkata] PHP Warning:  Constant APP_DEBUG already defined in /Applications/XAMPP/xamppfiles/htdocs/imalatur/config/app_config.php on line 11
+[23-Nov-2025 15:44:25 Asia/Kolkata] Exception in register.php POST: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'imalatur.otps' doesn't exist
+#0 /Applications/XAMPP/xamppfiles/htdocs/imalatur/userpanel/register.php(190): PDOStatement->execute(Array)
+#1 /Applications/XAMPP/xamppfiles/htdocs/imalatur/userpanel/register.php(341): verify_otp_db(Object(PDO), '919096463943', '9048')
+#2 {main}
+[23-Nov-2025 15:44:25 Asia/Kolkata] Suppressed output before JSON response: 
+[23-Nov-2025 15:44:39 Asia/Kolkata] PHP Warning:  Constant APP_DEBUG already defined in /Applications/XAMPP/xamppfiles/htdocs/imalatur/config/app_config.php on line 11
+[23-Nov-2025 15:44:42 Asia/Kolkata] PHP Warning:  Constant APP_DEBUG already defined in /Applications/XAMPP/xamppfiles/htdocs/imalatur/config/app_config.php on line 11
+[23-Nov-2025 15:44:48 Asia/Kolkata] PHP Warning:  Constant APP_DEBUG already defined in /Applications/XAMPP/xamppfiles/htdocs/imalatur/config/app_config.php on line 11
+[23-Nov-2025 15:44:48 Asia/Kolkata] Suppressed output before JSON response: 
+[23-Nov-2025 15:44:56 Asia/Kolkata] PHP Warning:  Constant APP_DEBUG already defined in /Applications/XAMPP/xamppfiles/htdocs/imalatur/config/app_config.php on line 11
+[23-Nov-2025 15:44:56 Asia/Kolkata] Suppressed output before JSON response: 
+[23-Nov-2025 15:45:06 Asia/Kolkata] PHP Warning:  Constant APP_DEBUG already defined in /Applications/XAMPP/xamppfiles/htdocs/imalatur/config/app_config.php on line 11
+[23-Nov-2025 15:45:06 Asia/Kolkata] Failed to store OTP in DB: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'imalatur.otps' doesn't exist
+[23-Nov-2025 15:45:07 Asia/Kolkata] Suppressed output before JSON response: 
+[23-Nov-2025 15:45:16 Asia/Kolkata] PHP Warning:  Constant APP_DEBUG already defined in /Applications/XAMPP/xamppfiles/htdocs/imalatur/config/app_config.php on line 11
+[23-Nov-2025 15:45:16 Asia/Kolkata] Exception in register.php POST: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'imalatur.otps' doesn't exist
+#0 /Applications/XAMPP/xamppfiles/htdocs/imalatur/userpanel/register.php(190): PDOStatement->execute(Array)
+#1 /Applications/XAMPP/xamppfiles/htdocs/imalatur/userpanel/register.php(341): verify_otp_db(Object(PDO), '919172400249', '0646')
+#2 {main}
+[23-Nov-2025 15:45:16 Asia/Kolkata] Suppressed output before JSON response: 
+[23-Nov-2025 15:46:10 Asia/Kolkata] PHP Warning:  Constant APP_DEBUG already defined in /Applications/XAMPP/xamppfiles/htdocs/imalatur/config/app_config.php on line 11
+[23-Nov-2025 15:50:11 Asia/Kolkata] PHP Warning:  Constant APP_DEBUG already defined in /Applications/XAMPP/xamppfiles/htdocs/imalatur/config/app_config.php on line 11
+[23-Nov-2025 15:50:13 Asia/Kolkata] PHP Warning:  Constant APP_DEBUG already defined in /Applications/XAMPP/xamppfiles/htdocs/imalatur/config/app_config.php on line 11
+[23-Nov-2025 15:50:20 Asia/Kolkata] PHP Warning:  Constant APP_DEBUG already defined in /Applications/XAMPP/xamppfiles/htdocs/imalatur/config/app_config.php on line 11
+[23-Nov-2025 15:50:34 Asia/Kolkata] PHP Warning:  Constant APP_DEBUG already defined in /Applications/XAMPP/xamppfiles/htdocs/imalatur/config/app_config.php on line 11
+[23-Nov-2025 15:50:34 Asia/Kolkata] Failed to store OTP in DB: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'imalatur.otps' doesn't exist
+[23-Nov-2025 15:50:36 Asia/Kolkata] Suppressed output before JSON response: 
+[23-Nov-2025 15:50:44 Asia/Kolkata] PHP Warning:  Constant APP_DEBUG already defined in /Applications/XAMPP/xamppfiles/htdocs/imalatur/config/app_config.php on line 11
+[23-Nov-2025 15:50:44 Asia/Kolkata] Suppressed output before JSON response: 
+[23-Nov-2025 15:51:00 Asia/Kolkata] PHP Warning:  Constant APP_DEBUG already defined in /Applications/XAMPP/xamppfiles/htdocs/imalatur/config/app_config.php on line 11
+[23-Nov-2025 15:51:00 Asia/Kolkata] Exception in register.php POST: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'imalatur.otps' doesn't exist
+#0 /Applications/XAMPP/xamppfiles/htdocs/imalatur/userpanel/register.php(190): PDOStatement->execute(Array)
+#1 /Applications/XAMPP/xamppfiles/htdocs/imalatur/userpanel/register.php(341): verify_otp_db(Object(PDO), '919096463943', '0753')
+#2 {main}
+[23-Nov-2025 15:51:00 Asia/Kolkata] Suppressed output before JSON response: 
+[23-Nov-2025 15:52:33 Asia/Kolkata] PHP Warning:  Constant APP_DEBUG already defined in /Applications/XAMPP/xamppfiles/htdocs/imalatur/config/app_config.php on line 11
+[23-Nov-2025 15:52:48 Asia/Kolkata] PHP Warning:  Constant APP_DEBUG already defined in /Applications/XAMPP/xamppfiles/htdocs/imalatur/config/app_config.php on line 11
+[23-Nov-2025 15:57:33 Asia/Kolkata] PHP Warning:  Constant APP_DEBUG already defined in /Applications/XAMPP/xamppfiles/htdocs/imalatur/config/app_config.php on line 11
+[23-Nov-2025 15:57:33 Asia/Kolkata] PHP Warning:  Constant APP_DEBUG already defined in /Applications/XAMPP/xamppfiles/htdocs/imalatur/config/app_config.php on line 11
+[23-Nov-2025 15:57:34 Asia/Kolkata] PHP Warning:  Constant APP_DEBUG already defined in /Applications/XAMPP/xamppfiles/htdocs/imalatur/config/app_config.php on line 11
+[23-Nov-2025 15:57:34 Asia/Kolkata] PHP Warning:  Constant APP_DEBUG already defined in /Applications/XAMPP/xamppfiles/htdocs/imalatur/config/app_config.php on line 11
+[23-Nov-2025 15:57:39 Asia/Kolkata] PHP Warning:  Constant APP_DEBUG already defined in /Applications/XAMPP/xamppfiles/htdocs/imalatur/config/app_config.php on line 11
+[23-Nov-2025 15:57:39 Asia/Kolkata] Failed to store OTP in DB: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'imalatur.otps' doesn't exist
+[23-Nov-2025 15:57:40 Asia/Kolkata] Suppressed output before JSON response: 
+[23-Nov-2025 15:57:51 Asia/Kolkata] PHP Warning:  Constant APP_DEBUG already defined in /Applications/XAMPP/xamppfiles/htdocs/imalatur/config/app_config.php on line 11
+[23-Nov-2025 15:57:51 Asia/Kolkata] Exception in register.php POST: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'imalatur.otps' doesn't exist
+#0 /Applications/XAMPP/xamppfiles/htdocs/imalatur/userpanel/register.php(190): PDOStatement->execute(Array)
+#1 /Applications/XAMPP/xamppfiles/htdocs/imalatur/userpanel/register.php(341): verify_otp_db(Object(PDO), '919096463943', '5647')
+#2 {main}
+[23-Nov-2025 15:57:51 Asia/Kolkata] Suppressed output before JSON response: 
