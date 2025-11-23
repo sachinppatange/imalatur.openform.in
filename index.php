@@ -7,7 +7,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Welcome | RSAT SaaS</title>
+    <title>Welcome </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         :root { --primary:#2563eb; --secondary:#0ea5e9; --bg:#f8fafc; --card:#ffffff; --text:#0f172a; --muted:#64748b; --border:#e2e8f0; --ring:#93c5fd; }
