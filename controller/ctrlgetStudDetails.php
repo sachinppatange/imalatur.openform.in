@@ -4,7 +4,7 @@ include_once '../config/config.php';
 function getAllStudent()
 {
     $leftAr = array();
-    $query = "select * from user order by id DESC";
+    $query = "select * from student order by stud_id DESC";
     $result = mysqli_query($GLOBALS['conn'], $query);
     $count = mysqli_num_rows($result);
     if ($count > 0) {
@@ -14,10 +14,10 @@ function getAllStudent()
     }
     return $leftAr;
 }
-function getStudentById($id)
+function getStudentById($stud_id)
 {
     $arr = array();
-    $sql = "select * from user where `createdby`='$id'";
+    $sql = "select * from student where `createdby`='$stud_id'";
     $res = mysqli_query($GLOBALS['conn'], $sql);
     $count = mysqli_num_rows($res);
     if ($count == 1) {
@@ -25,10 +25,10 @@ function getStudentById($id)
         return $arr;
     }
 }
-function getStudentByStudId($id)
+function getStudentByStudId($stud_id)
 {
     $arr = array();
-    $sql = "select * from user where `id`='$id'";
+    $sql = "select * from student where `stud_id`='$stud_id'";
 
     $res = mysqli_query($GLOBALS['conn'], $sql);
     // print_r($res);
@@ -43,7 +43,7 @@ function getStudentByStudId($id)
 function getStudentMobileById($id)
 {
     $arr = array();
-    $sql = "select * from user where `createdby`='$id'";
+    $sql = "select * from student where `createdby`='$id'";
     $res = mysqli_query($GLOBALS['conn'], $sql);
     $count = mysqli_num_rows($res);
     if ($count == 1) {
@@ -51,10 +51,10 @@ function getStudentMobileById($id)
         return $arr;
     }
 }
-function getStudentPaymentStatusById($id)
+function getStudentPaymentStatusById($stud_id)
 {
     $arr = array();
-    $sql = "select * from user where `createdby`='$id'";
+    $sql = "select * from student where `createdby`='$stud_id'";
     $res = mysqli_query($GLOBALS['conn'], $sql);
     $count = mysqli_num_rows($res);
     if ($count == 1) {
@@ -65,7 +65,7 @@ function getStudentPaymentStatusById($id)
 function getAllRegStudent()
 {
     $leftAr = array();
-    $query = "select * from user order by id  DESC";
+    $query = "select * from student order by stud_id  DESC";
     $result = mysqli_query($GLOBALS['conn'], $query);
     $count = mysqli_num_rows($result);
     if ($count > 0) {
@@ -75,10 +75,10 @@ function getAllRegStudent()
     }
     return $leftAr;
 }
-function getStudentRegById($id)
+function getStudentRegById($stud_id)
 {
     $arr = array();
-    $sql = "select * from user where `id`='$id'";
+    $sql = "select * from student where `stud_id`='$stud_id'";
     $res = mysqli_query($GLOBALS['conn'], $sql);
     $count = mysqli_num_rows($res);
     if ($count == 1) {
@@ -88,10 +88,10 @@ function getStudentRegById($id)
 }
 
 
-function getStudentRegByMaxId($id)
+function getStudentRegByMaxId($stud_id)
 {
     $arr = array();
-    $sql = "SELECT * FROM user WHERE id  = (SELECT MAX(id ) FROM student);
+    $sql = "SELECT * FROM student WHERE stud_id  = (SELECT MAX(stud_id ) FROM student);
 ";
     $res = mysqli_query($GLOBALS['conn'], $sql);
     $count = mysqli_num_rows($res);
@@ -107,21 +107,21 @@ function getStudentRegByMaxId($id)
 
 function gettotalStudents()
 {
-    $sql = "SELECT COUNT(*) AS total_records FROM user";
+    $sql = "SELECT COUNT(*) AS total_records FROM student";
     $res = mysqli_query($GLOBALS['conn'], $sql);
     $row = mysqli_fetch_assoc($res);
     return $row['total_records'];
 }
 function gettotalMembers()
 {
-    $sql = "SELECT COUNT(*) AS total_records FROM user";
+    $sql = "SELECT COUNT(*) AS total_records FROM student";
     $res = mysqli_query($GLOBALS['conn'], $sql);
     $row = mysqli_fetch_assoc($res);
     return $row['total_records'];
 }
 function getTotalPaidStudent()
 {
-    $sql = "SELECT COUNT(*) AS total_records FROM user WHERE status = 'success'";
+    $sql = "SELECT COUNT(*) AS total_records FROM student WHERE status = 'success'";
     $res = mysqli_query($GLOBALS['conn'], $sql);
 
     if ($res) {
@@ -134,7 +134,7 @@ function getTotalPaidStudent()
 function getTotalunPaidStudent()
 {
     $sql = "SELECT COUNT(*) AS total_records 
-    FROM user 
+    FROM student 
     WHERE status IS NULL OR status != 'success' OR status = ''";
     // $sql = "SELECT COUNT(*) AS total_records FROM student WHERE status != 'Success'";
     $res = mysqli_query($GLOBALS['conn'], $sql);
@@ -156,7 +156,7 @@ function getTotalunPaidStudent()
 function getAllPaidStudent()
 {
     $leftAr = array();
-    $query = "select * from user where status ='success' order by id DESC";
+    $query = "select * from student where status ='success' order by stud_id DESC";
     $result = mysqli_query($GLOBALS['conn'], $query);
     $count = mysqli_num_rows($result);
     if ($count > 0) {
@@ -171,9 +171,9 @@ function getAllUnpaidStudent()
 {
     $leftAr = array();
     $query = "SELECT * 
-    FROM user 
+    FROM student 
     WHERE status IS NULL OR status != 'success' OR status = '' 
-    ORDER BY id DESC";
+    ORDER BY stud_id DESC";
 
     $result = mysqli_query($GLOBALS['conn'], $query);
     $count = mysqli_num_rows($result);
