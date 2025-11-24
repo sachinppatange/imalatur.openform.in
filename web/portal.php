@@ -3,15 +3,15 @@
   include_once '../config/config.php';
   include_once '../controller/ctrlgetStudDetails.php';
   $chk=$_GET['chk'];
-  $studid=$_GET['studid'];
-  if($studid==""){
-	  $studid=$_SESSION['id'];
+  $id=$_GET['id'];
+  if($id==""){
+	  $id=$_SESSION['id'];
   }
 if($chk=="success"){
-	$qry="update student set status='Success' where stud_id='$studid'";
+	$qry="update user set status='Success' where id='$id'";
 	$result = mysqli_query($GLOBALS['conn'], $qry);
 }
-$stud=getStudentByStudId($studid);
+$stud=getStudentByStudId($id);
 
 //print_r($stud);
 // Include the Razorpay PHP library
@@ -58,7 +58,7 @@ echo '<script>
         theme: { color: "#738276" },
         handler: function (response) {
             // Payment success, redirect to portal
-            window.location.href = "./portal.php?chk=success&studid=' . $stud['stud_id'] . '";
+            window.location.href = "./portal.php?chk=success&id=' . $stud['id'] . '";
         },
         prefill: {
             name: "' . $stud['surname'] . ' ' . $stud['firstname'] . '",
