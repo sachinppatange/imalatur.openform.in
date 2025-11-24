@@ -149,7 +149,7 @@ if (empty($studid)) {
         echo json_encode(['status' => 'success', 'id' => $insert_id]);
         exit;
     } else {
-        header("Location: ../web/index.php?userid=$insert_id");
+        header("Location: ../web/indextest.php?userid=$insert_id");
         exit;
     }
 
