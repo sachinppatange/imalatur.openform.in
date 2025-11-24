@@ -1,0 +1,101 @@
+IMA Latur Runathon 2026 — सुचवलेली अपडेटेड फाईल रचना
+(प्रत्येक फाईल नंतर त्याची स्थिती दर्शविली आहे: Existing / Modified / New)
+
+project-root/
+├─ index.php                                  (Existing)  # landing
+├─ README.md                                  (Existing -> update with deployment notes)
+├─ migrations/
+│  ├─ 20251130_create_registrations.sql       (New)       # DB schema for registrations
+│  └─ (other future migrations...)            (New)
+├─ config/
+│  ├─ app_config.php                           (Modified)  # app-level settings, APP_NAME, OTP etc.
+│  ├─ wa_config.php                            (Existing)
+│  └─ razorpay_config.php                       (New)       # RAZORPAY_KEY_ID, KEY_SECRET, WEBHOOK_SECRET, CURRENCY
+├─ public_assets/
+│  ├─ css/                                     (New/Existing)
+│  ├─ js/                                      (New/Existing)
+│  └─ img/                                     (New/Existing)
+├─ payments/
+│  ├─ razorpay.php                              (New)       # create order, verify signatures, webhook handler
+│  └─ payment_helpers.php                       (New)       # status constants, helpers, logging
+├─ shared/
+│  ├─ validators.php                            (New)       # input validators (email, mobile, dob)
+│  └─ utils.php                                 (New)       # helpers: format_date, money_format, gen_receipt_no
+├─ adminpanel/
+│  ├─ admin_auth.php                            (Existing)
+│  ├─ admin_login.php                           (Existing)
+│  ├─ admin_logout.php                          (Existing)
+│  ├─ admin_dashboard.php                       (Modified)  # link to registrations pages + summary stats
+│  ├─ user_repository.php                       (Existing)
+│  ├─ whatsapp.php                              (Existing)
+│  ├─ storage/
+│  │  └─ log/
+│  │     ├─ whatsapp.log                        (Existing)
+│  │     └─ payments.log                        (New)
+│  ├─ registration_repository.php               (New)       # admin CRUD for registrations
+│  ├─ registrations_list.php                    (New)       # admin list (all, filter by status)
+│  ├─ registrations_paid.php                    (New)       # admin view: only paid
+│  ├─ registrations_unpaid.php                  (New)       # admin view: only unpaid/pending
+│  ├─ registration_view.php                     (New)       # detailed view, print receipt, mark paid
+│  └─ registration_mark_paid.php                (New)       # admin action (offline payment)
+├─ userpanel/
+│  ├─ auth.php                                  (Existing)
+│  ├─ dashboard.php                             (Modified)  # show registration status link(s)
+│  ├─ login.php                                 (Existing)
+│  ├─ logout.php                                (Existing)
+│  ├─ profile.php                               (Existing)
+│  ├─ signup.php                                (Modified)  # keep as account signup (minimal changes)
+│  ├─ register.php                              (New)       # full Runathon registration form (submit -> create registration + create Razorpay order)
+│  ├─ registration_confirm.php                  (New)       # summary before redirect to payment
+│  ├─ registration_callback.php                 (New)       # optional synchronous return handler
+│  ├─ registration_thankyou.php                 (New)       # post-payment success/failure page (shows receipt or action)
+│  ├─ registration_receipt.php                  (New)       # printable receipt (HTML)
+│  ├─ registration_history.php                  (New)       # user view: all their registrations
+│  ├─ user_repository.php                       (Existing)
+│  ├─ registration_repository.php               (New)       # shared repo for user/admin registration DB ops
+│  ├─ whatsapp.php                              (Existing)
+│  └─ storage/
+│     └─ log/
+│        ├─ whatsapp.log                        (Existing)
+│        └─ payments.log                        (New)
+└─ (other files)
+
+Key database objects (created by migration):
+- Table: registrations
+  - id (INT PK AUTO_INCREMENT)
+  - user_phone (VARCHAR)            -- E.164, nullable if guest not allowed
+  - email (VARCHAR)
+  - participant_name (VARCHAR)
+  - gender (VARCHAR/ENUM)
+  - dob (DATE)
+  - address (TEXT) / area / city / state / country
+  - tshirt_size (VARCHAR)
+  - emergency_name, emergency_number
+  - blood_group
+  - ticket_type (VARCHAR)
+  - amount_expected (INT)
+  - amount_paid (INT)
+  - payment_status (ENUM: 'pending','paid','unpaid')
+  - payment_provider (VARCHAR)      -- 'razorpay'
+  - payment_provider_order_id (VARCHAR)
+  - payment_provider_payment_id (VARCHAR)
+  - receipt_number (VARCHAR)
+  - created_at, updated_at, paid_at (DATETIME)
+
+Notes / guidance (short):
+- Keep signup.php for account creation (WhatsApp OTP). Add register.php for the Runathon form so account creation and event registration are logically separated.
+- On register.php submit:
+  1) create registrations DB row (payment_status = 'pending' or 'unpaid')
+  2) create Razorpay order via payments/razorpay.php
+  3) redirect user to Razorpay checkout
+  4) on payment success webhook / callback update registration (amount_paid, payment_status='paid', paid_at, receipt_number) and show registration_thankyou.php
+  5) On successful registration auto-login: set $_SESSION['auth_user'] to phone (this is already pattern in signup.php)
+- Admin pages split: registrations_paid.php and registrations_unpaid.php as requested.
+- Add logs for payments in storage/logs/payments.log and optionally use Razorpay webhook verification for security.
+
+अगर तुम्हाला हवे तर मी पुढे खाली दोन्ही गोष्टी बनवू शकतो:
+- migration SQL फाईल (20251130_create_registrations.sql) तयार करणे
+- register.php आणि payments/razorpay.php साठी फाईल-हेडर (file stubs) — कोड नको तेव्हा फक्त पाथ आणि वर्णन पाठवू
+
+काय पुढे करु? (तुम्ही फक्त फाईल-स्ट्रक्चर विचारले — त्यामुळे हा अंतिम प्रस्ताव आहे.)
+```
