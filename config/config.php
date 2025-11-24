@@ -1,19 +1,19 @@
 <?php
-
+/*
 $host="localhost";
 $user="root";
 $pass="";
 $dbname="imalaturpay";
 $GLOBALS['conn'] = mysqli_connect($host, $user, $pass, $dbname);
+*/
 
 
-/*
 $host="localhost";
 $user="u750208840_imalaturuser";
 $pass="Latur@413512#";
 $dbname="u750208840_imalaturdb";
 $GLOBALS['conn'] = mysqli_connect($host, $user, $pass, $dbname);
-*/
+
 
 function setescape($val){
 	return mysqli_real_escape_string($GLOBALS['conn'], $val);
