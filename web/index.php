@@ -8,8 +8,8 @@ $userid = isset($_GET['userid']) ? $_GET['userid'] : null;
 
 // Default values
 $user = null;
-$api_key = 'rzp_live_D53J9UWwYtGimn';
-$api_secret = 'w0SnqzH2SOOIc0gnUR7cYO3r';
+$api_key = 'rzp_test_RjdhM2mUsel2Gv';
+$api_secret = 'fPSQpWhp4Z2Z9uDIR5Ngh652';
 $order_id = '';
 $order = null;
 $order_amount = 100; // paise default = ₹1
