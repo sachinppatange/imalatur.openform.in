@@ -1,250 +1,304 @@
 <?php
-session_start();
-include_once '../config/config.php';
-
-// Accept userid (preferred) or studid (back-compat) or session id
-$userid = null;
-if (isset($_GET['userid']) && $_GET['userid'] !== '') $userid = intval($_GET['userid']);
-elseif (isset($_GET['studid']) && $_GET['studid'] !== '') $userid = intval($_GET['studid']);
-elseif (isset($_SESSION['id'])) $userid = intval($_SESSION['id']);
-
-$conn = $GLOBALS['conn'] ?? null;
-if (!$conn || !($conn instanceof mysqli)) {
-    http_response_code(500);
-    exit('Database connection not found. Check config.php');
+  session_start();
+  include_once '../config/config.php';
+  include_once '../controller/ctrlgetStudDetails.php';
+  $chk=$_GET['chk'];
+  $studid=$_GET['studid'];
+  if($studid==""){
+	  $studid=$_SESSION['id'];
+  }
+if($chk=="success"){
+	$qry="update student set status='Success' where stud_id='$studid'";
+	$result = mysqli_query($GLOBALS['conn'], $qry);
 }
+$stud=getStudentByStudId($studid);
 
-// Razorpay credentials (move to config.php for production)
+//print_r($stud);
+// Include the Razorpay PHP library
+require('razorpay-php/Razorpay.php');
+use Razorpay\Api\Api;
+
+// Initialize Razorpay with your key and secret
 $api_key = 'rzp_live_dfhtnkmedcTWBN';
 $api_secret = 'jzFO7kSdSOXJ7RLF7JeuyRoj';
-
-// If Razorpay returned a success redirect, it will include razorpay_payment_id, razorpay_order_id, razorpay_signature
-$chk = isset($_GET['chk']) ? trim($_GET['chk']) : '';
-$rp_payment_id = $_GET['razorpay_payment_id'] ?? '';
-$rp_order_id = $_GET['razorpay_order_id'] ?? '';
-$rp_signature = $_GET['razorpay_signature'] ?? '';
-
-if ($chk === 'success' && $userid && $rp_payment_id && $rp_order_id && $rp_signature) {
-    // Verify signature with Razorpay SDK
-    require_once __DIR__ . '/razorpay-php/Razorpay.php';
-    use Razorpay\Api\Api;
-    $api = new Api($api_key, $api_secret);
-    $attributes = [
-        'razorpay_order_id' => $rp_order_id,
-        'razorpay_payment_id' => $rp_payment_id,
-        'razorpay_signature' => $rp_signature
-    ];
-    try {
-        $api->utility->verifyPaymentSignature($attributes);
-        // signature valid -> update user.status to 'Success' and store amount and maybe other details if needed
-        $stmt = mysqli_prepare($conn, "UPDATE `user` SET `status` = 'Success' WHERE id = ? LIMIT 1");
-        if ($stmt) {
-            mysqli_stmt_bind_param($stmt, 'i', $userid);
-            mysqli_stmt_execute($stmt);
-            mysqli_stmt_close($stmt);
-        }
-        // Optionally: you can store payment_id/order_id in a payments table. For now we just mark status.
-        $_SESSION['message'] = 'Payment verified and status updated.';
-        // Redirect to portal without signature params to avoid re-processing on refresh
-        header("Location: ./portal.php?userid=" . urlencode($userid));
-        exit;
-    } catch (Exception $e) {
-        error_log('Razorpay signature verification failed: ' . $e->getMessage());
-        $_SESSION['error1'] = 'Payment verification failed. Please contact support.';
-        header("Location: ./portal.php?userid=" . urlencode($userid));
-        exit;
-    }
+if ($stud['amount'] != "") {
+    $amount = $stud['amount'] * 100;
+} else {
+    $amount = 100;
 }
 
-// Fetch user row from `user` table
-$user = null;
-if ($userid) {
-    $sql = "SELECT id, ticket, email, whatsappno, participant_name, gender, dob, address, area, city, state, tshirt_size, emergency_name, emergency_number, blood_group, ticket_amount, amount, status, createdby, createdon
-            FROM `user` WHERE id = ? LIMIT 1";
-    $stmt = mysqli_prepare($conn, $sql);
-    if ($stmt) {
-        mysqli_stmt_bind_param($stmt, 'i', $userid);
-        mysqli_stmt_execute($stmt);
-        $res = mysqli_stmt_get_result($stmt);
-        if ($res) $user = mysqli_fetch_assoc($res);
-        mysqli_stmt_close($stmt);
-    }
+$api = new Api($api_key, $api_secret);
+// Create an order
+$order = $api->order->create([
+    'amount' => $amount, // amount in paise (100 paise = 1 rupee)
+    'currency' => 'INR',
+    'receipt' => 'order_receipt_1001'
+]);
+// Get the order ID
+$order_id = $order->id;
+
+// Set your callback URL
+$callback_url = "https://registration.sainikividyalayatuljapur.in/web/paymentrecipt.php?chk=success";
+
+// Include Razorpay Checkout.js library
+echo '<script src="https://checkout.razorpay.com/v1/checkout.js"></script>';
+
+
+echo '<script>
+    function startPayment() {
+		
+    var options = {
+        key: "' . $api_key . '",
+        amount: ' . $order->amount . ',
+        currency: "' . $order->currency . '",
+        name: "' . $stud['surname'] . ' ' . $stud['firstname'] . '",
+        description: "Student Registration Fee",
+        image: "https://cdn.razorpay.com/logos/GhRQcyean79PqE_medium.png",
+        order_id: "' . $order_id . '",
+        theme: { color: "#738276" },
+        handler: function (response) {
+            // Payment success, redirect to portal
+            window.location.href = "./portal.php?chk=success&studid=' . $stud['stud_id'] . '";
+        },
+        prefill: {
+            name: "' . $stud['surname'] . ' ' . $stud['firstname'] . '",
+            email: "' . $stud['email'] . '",
+            contact: "' . $stud['whatsappno'] . '"
+        },
+        notes: {
+            address: "Customer Address"
+        },
+        modal: {
+            escape: false
+        }
+    };
+    var rzp = new Razorpay(options);
+    rzp.open();
 }
 
-// Determine order amount (paise) and create Razorpay order only if user exists and not already paid
-$order = null;
-$order_id = '';
-$order_amount = 100; // default ₹1 -> 100 paise
-$order_currency = 'INR';
-
-if (!empty($user)) {
-    $status = strtolower(trim((string)($user['status'] ?? '')));
-    if ($status !== 'success' && $status !== 'paid') {
-        if (!empty($user['ticket_amount']) && is_numeric($user['ticket_amount'])) {
-            $order_amount = intval(floatval($user['ticket_amount']) * 100);
-        } elseif (!empty($user['amount']) && is_numeric($user['amount'])) {
-            $order_amount = intval(floatval($user['amount']) * 100);
-        } else {
-            $order_amount = 100;
-        }
-
-        // Create order via Razorpay
-        try {
-            require_once __DIR__ . '/razorpay-php/Razorpay.php';
-            use Razorpay\Api\Api as RazorApi;
-            $razor = new RazorApi($api_key, $api_secret);
-            $order = $razor->order->create([
-                'amount' => $order_amount,
-                'currency' => $order_currency,
-                'receipt' => 'order_user_' . $user['id']
-            ]);
-            $order_id = $order->id ?? '';
-        } catch (Exception $e) {
-            error_log('Razorpay order creation failed: ' . $e->getMessage());
-            $order = null;
-            $order_id = '';
-        }
-    } else {
-        // already paid
-        if (!empty($user['amount']) && is_numeric($user['amount'])) {
-            $order_amount = intval(floatval($user['amount']) * 100);
-        } else {
-            $order_amount = 0;
-        }
-    }
-}
-
-// Prepare prefill values
-$prefill_name = trim((string)($user['participant_name'] ?? ''));
-if ($prefill_name === '') {
-    $prefill_name = trim(((string)($user['surname'] ?? '') . ' ' . (string)($user['firstname'] ?? '')));
-}
-$prefill_email = $user['email'] ?? '';
-$prefill_contact = $user['whatsappno'] ?? '';
-
-// JS-safe data
-$js = [
-    'api_key' => $api_key,
-    'order_amount' => $order_amount,
-    'order_currency' => $order_currency,
-    'order_id' => $order_id,
-    'prefill_name' => $prefill_name,
-    'prefill_email' => $prefill_email,
-    'prefill_contact' => $prefill_contact,
-    'userid' => $userid,
-    'user_status' => $user['status'] ?? ''
-];
+</script>';
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title><?php echo htmlspecialchars(function_exists('getcompany') ? getcompany() : 'Portal', ENT_QUOTES, 'UTF-8'); ?></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><?php echo htmlspecialchars(getcompany(), ENT_QUOTES, 'UTF-8'); ?></title>
+  <link rel="icon" href="../assets/img/logo.jpg" type="image/x-icon">
+
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Tempusdominus Bootstrap 4 -->
+  <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- JQVMap -->
+  <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">
+  <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
-  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-
-  <script>
-    const RZP = <?php echo json_encode($js, JSON_UNESCAPED_UNICODE); ?>;
-
-    function startPayment() {
-      if (!RZP.order_id) {
-        alert('Payment not available for this user (maybe already paid or order error).');
-        return;
-      }
-      var options = {
-        key: RZP.api_key,
-        amount: RZP.order_amount,
-        currency: RZP.order_currency,
-        name: RZP.prefill_name || 'Participant',
-        description: "Registration Fee",
-        order_id: RZP.order_id,
-        prefill: {
-          name: RZP.prefill_name || '',
-          email: RZP.prefill_email || '',
-          contact: RZP.prefill_contact || ''
-        },
-        handler: function (response) {
-          // Redirect with Razorpay response parameters for server-side verification
-          var url = "./portal.php?chk=success&userid=" + encodeURIComponent(RZP.userid || '');
-          url += "&razorpay_payment_id=" + encodeURIComponent(response.razorpay_payment_id || '');
-          url += "&razorpay_order_id=" + encodeURIComponent(response.razorpay_order_id || '');
-          url += "&razorpay_signature=" + encodeURIComponent(response.razorpay_signature || '');
-          window.location.href = url;
-        },
-        theme: { color: "#738276" },
-        modal: { escape: false }
-      };
-      var rzp = new Razorpay(options);
-      rzp.open();
-    }
-  </script>
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
+  <!-- summernote -->
+  <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
 </head>
+
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
-    <?php include_once 'navbar.php'; ?>
-    <?php include_once 'sidebar.php'; ?>
 
+    <!-- Preloader -->
+    <!-- <div class="preloader flex-column justify-content-center align-items-center">
+      <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+    </div> -->
+
+    <!-- Navbar -->
+    <?php include_once 'navbar.php'; ?>
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <?php include_once 'sidebar.php'; ?>
+    <!-- Main Sidebar Container End -->
+
+
+    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper" style="background-color:#fff;">
+      <!-- Content Header (Page header) -->
       <div class="content-header">
         <div class="container-fluid">
           <div class="row mb-2">
-            <div class="col-sm-6"><h1 class="m-0">Dashboard</h1></div>
+            <div class="col-sm-6">
+              <h1 class="m-0">Dashboard</h1>
+            </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Dashboard</li>
+                <li class="breadcrumb-item active">Dashboard v1</li>
               </ol>
-            </div>
-          </div>
-        </div>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
       </div>
+      <!-- /.content-header -->
 
+      <!-- Main content -->
       <section class="content">
         <div class="container-fluid">
+          <!-- Small boxes (Stat box) -->
           <div class="row">
-            <!-- Profile card -->
             <div class="col-lg-3 col-6">
+              <!-- small box -->
               <div class="small-box bg-info">
                 <div class="inner">
-                  <h3><?php echo !empty($user) ? htmlspecialchars($user['id'], ENT_QUOTES) : '0'; ?></h3>
+                  <h3><?php print_r($totalstud); ?></h3>
+
                   <p>View Profile</p>
                 </div>
-                <div class="icon"><i class="ion ion-bag"></i></div>
+                <div class="icon">
+                  <i class="ion ion-bag"></i>
+                </div>
                 <a href="profile.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
+            <!-- ./col -->
+		<?php if($stud['status']=="Success"){ ?>
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-success">
+                <div class="inner">
+                  <h3><?php print_r($totalmem); ?></h3>  
 
-            <?php if (!empty($user) && strtolower(trim((string)$user['status'])) === 'success') { ?>
-              <div class="col-lg-3 col-6">
-                <div class="small-box bg-success">
-                  <div class="inner"><h3>1</h3><p>View Receipt</p></div>
-                  <div class="icon"><i class="ion ion-stats-bars"></i></div>
-                  <a href="paymentrecipt.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                  <p>View Reciept</p>
                 </div>
-              </div>
-            <?php } else { ?>
-              <div class="col-lg-3 col-6">
-                <div class="small-box bg-danger">
-                  <div class="inner"><h3>0</h3><p>Payment Pending</p></div>
-                  <div class="icon"><i class="ion ion-stats-bars"></i></div>
-                  <button class="btn btn-light" onclick="startPayment()">Make Payment</button>
+                <div class="icon">
+                  <i class="ion ion-stats-bars"></i>
                 </div>
+                <a href="paymentrecipt.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
-            <?php } ?>
+            </div>
+		<?php }else{ ?>
+			<div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-danger">
+                <div class="inner">
+                  <h3><?php print_r($totalmem); ?></h3>  
 
+                  <p>Payment Pending</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-stats-bars"></i>
+                </div>
+                <button onclick="startPayment()">Make Payment</button>
+              </div>
+            </div>
+		<?php } ?>
+            <!--<div class="col-lg-3 col-6">
+              <!-- small box -- >
+              <div class="small-box bg-warning">
+                <div class="inner">
+                  <h3><?php print_r($totalmem); ?></h3>  
+
+                  <p>View Hall Ticket</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-stats-bars"></i>
+                </div>
+                <a href="paymentrecipt.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>-->
+            <!-- ./col -->
+            <!-- <div class="col-lg-3 col-6">
+              <!-- small box 
+              <div class="small-box bg-warning">
+                <div class="inner">
+                  <h3>44</h3>
+
+                  <p>User Registrations</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-person-add"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            <!-- ./col 
+            <div class="col-lg-3 col-6">
+              <!-- small box 
+              <div class="small-box bg-danger">
+                <div class="inner">
+                  <h3>65</h3>
+
+                  <p>Unique Visitors</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-pie-graph"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div> -->
+            <!-- ./col 7775868787-->
           </div>
-        </div>
+          <!-- /.row -->
+        </div><!-- /.container-fluid -->
       </section>
+      <!-- /.content -->
     </div>
+    <!-- /.content-wrapper -->
+
+    <!-- footer start  -->
 
     <?php include_once 'footer.php'; ?>
-    <aside class="control-sidebar control-sidebar-dark"></aside>
-  </div>
+    <!-- footer start End -->
 
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+  </div>
+  <!-- ./wrapper -->
+
+  <!-- jQuery -->
   <script src="plugins/jquery/jquery.min.js"></script>
+  <!-- jQuery UI 1.11.4 -->
+  <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+  <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+  <script>
+    $.widget.bridge('uibutton', $.ui.button)
+  </script>
+  <!-- Bootstrap 4 -->
   <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- ChartJS -->
+  <script src="plugins/chart.js/Chart.min.js"></script>
+  <!-- Sparkline -->
+  <script src="plugins/sparklines/sparkline.js"></script>
+  <!-- JQVMap -->
+  <script src="plugins/jqvmap/jquery.vmap.min.js"></script>
+  <script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+  <!-- jQuery Knob Chart -->
+  <script src="plugins/jquery-knob/jquery.knob.min.js"></script>
+  <!-- daterangepicker -->
+  <script src="plugins/moment/moment.min.js"></script>
+  <script src="plugins/daterangepicker/daterangepicker.js"></script>
+  <!-- Tempusdominus Bootstrap 4 -->
+  <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+  <!-- Summernote -->
+  <script src="plugins/summernote/summernote-bs4.min.js"></script>
+  <!-- overlayScrollbars -->
+  <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+  <!-- AdminLTE App -->
   <script src="dist/js/adminlte.js"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="dist/js/demo.js"></script>
+  <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+  <script src="dist/js/pages/dashboard.js"></script>
 </body>
+
 </html>
