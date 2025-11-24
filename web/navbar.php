@@ -7,136 +7,57 @@
     <li class="nav-item d-none d-sm-inline-block">
       <a href="index.php" class="nav-link">Home</a>
     </li>
-    <!-- <li class="nav-item d-none d-sm-inline-block">
-      <a href="#" class="nav-link">Contact</a>
-    </li> -->
   </ul>
 
   <!-- Right navbar links -->
   <ul class="navbar-nav ml-auto">
-    <!-- Navbar Search -->
-    <!-- <li class="nav-item">
-      <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-        <i class="fas fa-search"></i>
-      </a>
-      <div class="navbar-search-block">
-        <form class="form-inline">
-          <div class="input-group input-group-sm">
-            <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-            <div class="input-group-append">
-              <button class="btn btn-navbar" type="submit">
-                <i class="fas fa-search"></i>
-              </button>
-              <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                <i class="fas fa-times"></i>
-              </button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </li> -->
-
-    <!-- Messages Dropdown Menu -->
-    <!-- <li class="nav-item dropdown">
-      <a class="nav-link" data-toggle="dropdown" href="#">
-        <i class="far fa-comments"></i>
-        <span class="badge badge-danger navbar-badge">3</span>
-      </a>
-      <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-        <a href="#" class="dropdown-item">
-          <!-- Message Start --
-          <div class="media">
-            <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-            <div class="media-body">
-              <h3 class="dropdown-item-title">
-                Brad Diesel
-                <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-              </h3>
-              <p class="text-sm">Call me whenever you can...</p>
-              <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-            </div>
-          </div>
-          <!-- Message End --
-        </a>
-        <div class="dropdown-divider"></div>
-        <a href="#" class="dropdown-item">
-          <!-- Message Start --
-          <div class="media">
-            <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-            <div class="media-body">
-              <h3 class="dropdown-item-title">
-                John Pierce
-                <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-              </h3>
-              <p class="text-sm">I got your message bro</p>
-              <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-            </div>
-          </div>
-          <!-- Message End --
-        </a>
-        <div class="dropdown-divider"></div>
-        <a href="#" class="dropdown-item">
-          <!-- Message Start --
-          <div class="media">
-            <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-            <div class="media-body">
-              <h3 class="dropdown-item-title">
-                Nora Silvester
-                <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-              </h3>
-              <p class="text-sm">The subject goes here</p>
-              <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-            </div>
-          </div>
-          <!-- Message End -
-        </a>
-        <div class="dropdown-divider"></div>
-        <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-      </div>
-    </li> -->
-    <!-- Notifications Dropdown Menu -->
-    <!-- <li class="nav-item dropdown">
-      <a class="nav-link" data-toggle="dropdown" href="#">
-        <i class="far fa-bell"></i>
-        <span class="badge badge-warning navbar-badge">15</span>
-      </a>
-      <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-        <span class="dropdown-item dropdown-header">15 Notifications</span>
-        <div class="dropdown-divider"></div>
-        <a href="#" class="dropdown-item">
-          <i class="fas fa-envelope mr-2"></i> 4 new messages
-          <span class="float-right text-muted text-sm">3 mins</span>
-        </a>
-        <div class="dropdown-divider"></div>
-        <a href="#" class="dropdown-item">
-          <i class="fas fa-users mr-2"></i> 8 friend requests
-          <span class="float-right text-muted text-sm">12 hours</span>
-        </a>
-        <div class="dropdown-divider"></div>
-        <a href="#" class="dropdown-item">
-          <i class="fas fa-file mr-2"></i> 3 new reports
-          <span class="float-right text-muted text-sm">2 days</span>
-        </a>
-        <div class="dropdown-divider"></div>
-        <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-      </div>
-    </li> -->
-    <!-- <li class="nav-item">
-      <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-        <i class="fas fa-expand-arrows-alt"></i>
-      </a>
-    </li> -->
-
     <div class="dropdown">
       <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
         <i class="fas fa-user"></i>
       </a>
-      <div class="dropdown-menu" aria-labelledby="userDropdown">
-        <!-- <div class="dropdown-divider"></div> -->
-        <a class="dropdown-item" href="profile.php">Profile</a>
-        <a class="dropdown-item" href="logout.php">Logout</a>
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+        <?php
+        // Safe access to DB and session to show user info from `user` table
+        include_once __DIR__ . '/../config/config.php';
+        $uid = isset($_SESSION['id']) ? intval($_SESSION['id']) : 0;
+        function h($s) { return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); }
 
+        if ($uid && ($GLOBALS['conn'] ?? null) instanceof mysqli) {
+            $conn = $GLOBALS['conn'];
+            $sql = "SELECT id, participant_name, email, whatsappno FROM `user` WHERE id = ? LIMIT 1";
+            if ($stmt = mysqli_prepare($conn, $sql)) {
+                mysqli_stmt_bind_param($stmt, 'i', $uid);
+                mysqli_stmt_execute($stmt);
+                $res = mysqli_stmt_get_result($stmt);
+                $user = $res ? mysqli_fetch_assoc($res) : null;
+                mysqli_stmt_close($stmt);
+            } else {
+                $user = null;
+            }
+        } else {
+            $user = null;
+        }
+
+        if ($user) {
+            // Display basic user info and links
+            echo '<div class="dropdown-item"><strong>' . h($user['participant_name']) . '</strong></div>';
+            if (!empty($user['email'])) {
+                echo '<div class="dropdown-item small text-muted">' . h($user['email']) . '</div>';
+            }
+            if (!empty($user['whatsappno'])) {
+                echo '<div class="dropdown-item small text-muted">+' . h($user['whatsappno']) . '</div>';
+            }
+            echo '<div class="dropdown-divider"></div>';
+            echo '<a class="dropdown-item" href="profile.php">Profile</a>';
+            echo '<a class="dropdown-item" href="paymentrecipt.php">Receipt</a>';
+            echo '<a class="dropdown-item" href="logout.php">Logout</a>';
+        } else {
+            // Not logged in / no user
+            echo '<a class="dropdown-item" href="studentlogin.php">Login</a>';
+            echo '<a class="dropdown-item" href="index.php">Register</a>';
+        }
+        ?>
       </div>
     </div>
   </ul>
