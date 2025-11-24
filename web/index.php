@@ -164,7 +164,7 @@ $order_currency = ($order && isset($order->currency)) ? $order->currency : 'INR'
               <h3 class="text-primary">Registration Form</h3>
             </div>
             <div class="card-body">
-              <form action="../controller/ctrlStudRegistrationtest.php" method="post" enctype="multipart/form-data" id="registrationForm">
+              <form action="../controller/ctrlStudRegistration.php" method="post" enctype="multipart/form-data" id="registrationForm">
                 <!-- Ticket (dropdown in English with INR values) -->
                 <div class="form-group">
                   <label for="ticket_select">Ticket</label>
