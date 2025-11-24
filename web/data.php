@@ -4,13 +4,13 @@ require('razorpay-php/Razorpay.php');
 use Razorpay\Api\Api;
 
 // Initialize Razorpay with your key and secret
-$api_key = 'rzp_test_cGFCE15kh7C0T9';
-$api_secret = 'G2OcPqLJAaK6heqt9s0Ms8Dy';
+$api_key = 'rzp_live_D53J9UWwYtGimn';
+$api_secret = 'w0SnqzH2SOOIc0gnUR7cYO3r';
 
 $api = new Api($api_key, $api_secret);
 // Create an order
 $order = $api->order->create([
-    'amount' => 10000, // amount in paise (100 paise = 1 rupee)
+    'amount' => 1000, // amount in paise (100 paise = 1 rupee)
     'currency' => 'INR',
     'receipt' => 'order_receipt_1001'
 ]);
